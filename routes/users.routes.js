@@ -14,7 +14,7 @@ router.get('/user', async (req, res) => {
       }
     });
 
-    router.post('/user/uploadprofilepic', uploadImage.single('image'), async (req, res) => {
+    router.post('/user/profilepic', uploadImage.single('avatar'), async (req, res) => {
 
       const { path } = req.file;
       const { id } = req.user;
@@ -25,6 +25,5 @@ router.get('/user', async (req, res) => {
         res.status(500).json(error);
       }
     });
-
 
 module.exports = router
