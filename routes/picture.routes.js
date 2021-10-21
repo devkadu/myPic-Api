@@ -8,16 +8,21 @@ const cloudinary = require('cloudinary').v2
 const router = Router();
 
  router.post('/picture', uploadImage.single('photos'), async(req, res) => {
-   const { path: url ='' } = req.file;
-   const { title } = req.body;
-   const { id } = req.user;
-   console.log(req.body)
+  const { title } = req.body;
+  const { path } = req.file;
+  const {id, username } = req.user
+
+
+   
 
    try {
-    const picture = await Picture.create({
-      title, url, user: id, 
+     const picture = await Picture.create({
+       title, path, user: id, 
+      
      });
-      const updateUser = await User.findByIdAndUpdate(id, {$push: { pictures: picture }} , {new: true,});
+
+     await User.findByIdAndUpdate(id, {$push: { pictures: picture}}, { new: true});
+  
     res.status(200).json(picture);
       } catch (error) {
     res.status(500).json(error);
@@ -65,6 +70,7 @@ router.delete('/picture/:id', async(req, res) =>{
       const name = fileArray[0]
       await cloudinary.uploader.destroy(`myPic/${name}`)
       await Picture.findByIdAndRemove(req.params.id);
+      console.log(req.params.id)
     
     res.status(200).json({ message: "picture delete" });
   } catch (error) {
