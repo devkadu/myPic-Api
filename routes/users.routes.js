@@ -1,13 +1,15 @@
 const {Router} = require('express');
 const User = require('../models/User');
 const uploadImage = require('../config/cloudinary.config');
+const Picture = require('../models/Picture');
+
 
 const router = Router();
 
 
 router.get('/user', async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find()
         res.status(200).json(users);
       } catch (error) {
         res.status(500).json(error);

@@ -2,13 +2,9 @@ const {Schema, model} = require('mongoose');
 
 const pictureSchema = new Schema(
     {
-        title: String,
-        url: String,
-        comments: [{ body: String, date: Date}],
-        userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+        title: { type: String},
+        url: {type: String},
+        user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     },
     {
         timestamps: true,
