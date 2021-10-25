@@ -9,7 +9,7 @@ const router = Router();
 
  router.post('/picture', uploadImage.single('photos'), async(req, res) => {
   const { title } = req.body;
-  const { path } = req.file;
+  const { path: url='' } = req.file;
   const {id, username } = req.user
 
 
@@ -17,7 +17,7 @@ const router = Router();
 
    try {
      const picture = await Picture.create({
-       title, path, user: id, 
+       title, url, user: id, 
       
      });
 
