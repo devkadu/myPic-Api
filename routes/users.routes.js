@@ -18,7 +18,7 @@ router.get('/user', async (req, res) => {
 
     router.get('/user/:id', async (req, res) => {
       try {
-          const users = await User.findById(req.params.id)
+          const users = await User.findById(req.params.id).populate('pictures')
           res.status(200).json(users);
         } catch (error) {
           res.status(500).json(error);
