@@ -16,6 +16,15 @@ router.get('/user', async (req, res) => {
       }
     });
 
+    router.get('/user/:id', async (req, res) => {
+      try {
+          const users = await User.findById(req.params.id)
+          res.status(200).json(users);
+        } catch (error) {
+          res.status(500).json(error);
+        }
+      });
+
     router.post('/user/profilepic', uploadImage.single('avatar'), async (req, res) => {
 
       const { path } = req.file;

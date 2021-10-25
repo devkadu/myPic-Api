@@ -4,7 +4,7 @@ const userSchema = new Schema(
     {
         username: {type: String, unique:true, required: true },
         passwordHash: {type: String, required: true },
-        profilePicture: String,
+        profilePicture: {type: String},
         pictures: [{type: Schema.Types.ObjectId, ref:'Picture'}],
         
     },
