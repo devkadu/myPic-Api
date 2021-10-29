@@ -8,16 +8,14 @@ const cloudinary = require('cloudinary').v2
 const router = Router();
 
  router.post('/picture', uploadImage.single('photos'), async(req, res) => {
-  const { title } = req.body;
+  const { title, comment } = req.body;
   const { path: url='' } = req.file;
   const {id, username } = req.user
-
-
-   
-
+  console.log(req.file)
+  
    try {
      const picture = await Picture.create({
-       title, url, user: id, 
+       title, url, comment, user: id, 
       
      });
 
