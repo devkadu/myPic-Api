@@ -6,6 +6,7 @@ const connectDb = require('./config/dbconfig');
 const userRoutes = require('./routes/users.routes');
 const authRoutes = require('./routes/auth.routes');
 const pictureRoutes = require('./routes/picture.routes')
+const commentRoutes = require('./routes/comments.routes')
 const authMiddleware = require('./middlewares/auth.middlewares');
 
 
@@ -27,7 +28,7 @@ app.use(authMiddleware);
 
 app.use('/', userRoutes);
 app.use('/', pictureRoutes);
-
+app.use('/', commentRoutes);
 
 
 

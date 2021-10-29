@@ -5,17 +5,17 @@ const Picture = require('../models/Picture')
 
 const router = Router();
 
-router.post('/comment', async (req, res) =>{
-    const {comment} = req.body;
+router.post('/comment/:id', async (req, res) =>{
+    const { id } = req.params;
+    
     try {
-        const comment = await Comment.create({
-         comment
-         
-        });
-   
-        await Picture.findByIdAndUpdate(id, {$push: { comment: comment}}, { new: true});
-     
-       res.status(200).json(picture);
+        /* const picture = await Picture.findById()
+        res.status(400).json({message: "ok"}) */
+
+        const newComment = {...req.body, id}
+        const commentsfromDb = await Comment.create(newComment);
+        await Picture.findByIdAndUpdate(id, {comment: commentsfromDb._id}, {new: true})
+        res.status(201).json(commentsfromDb);
          } catch (error) {
        res.status(500).json(error);
      }
