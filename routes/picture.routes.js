@@ -39,7 +39,10 @@ const router = Router();
 
 router.get('/picture/:id', async(req, res) => {
   try {
-    const picture = await Picture.findById(req.params.id).populate('comment');
+    const picture = await Picture.findById(req.params.id).populate({
+      path: "comment",
+      select: ["comment"],
+    });
     res.status(200).json(picture);
   } catch (error) {
     res.status(500).json({message: "error"});

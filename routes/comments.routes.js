@@ -14,7 +14,7 @@ router.post('/comment/:id', async (req, res) =>{
 
         const newComment = {...req.body, id}
         const commentsfromDb = await Comment.create(newComment);
-        await Picture.findByIdAndUpdate(id, {comment: commentsfromDb._id}, {new: true})
+        await Picture.findByIdAndUpdate(id, {$push: {comment: commentsfromDb._id}}, {new: true})
         res.status(201).json(commentsfromDb);
          } catch (error) {
        res.status(500).json(error);

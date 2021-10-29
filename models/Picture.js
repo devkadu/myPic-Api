@@ -6,7 +6,7 @@ const pictureSchema = new Schema(
         url: {type: String},
         favorite: {type: Boolean, default: false},
         user: { type: Schema.Types.ObjectId, ref: 'User', required: true},
-        comment: {type: Schema.Types.ObjectId, ref:'Comment'}
+        comment: [{type: Schema.Types.ObjectId, ref:'Comment'}],
     },
     {
         timestamps: true,
